@@ -736,6 +736,14 @@ struct mne *mp;
 				outrb(&e1, is_abs(&e1) ? 0 : R_PAGN);
 				outrw(&e2, 0);
 				break;
+      case S_SPCL: /* SP,#Word */
+        if (x1 != SPCL_SP) {
+          mcherr("SP is the only special register allowed");
+        } else {
+          outaw(0x1CEE);
+          outrw(&e2, 0);
+        }
+        break;
 			default:
 				aerr();
 				break;
