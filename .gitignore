@@ -1,0 +1,5 @@
+*.DS_Store
+*.o
+asxv5pxx/asxmak/linux/build/
+asxv5pxx/asxmak/linux/exe/
+
