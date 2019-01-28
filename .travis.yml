@@ -1,0 +1,4 @@
+language: c
+script:
+ - make -C asxv5pxx/asxmak/linux/build all
+
