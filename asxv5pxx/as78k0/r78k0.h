@@ -49,9 +49,9 @@
 /*
  * Instruction Pages
  */
-#define RK0PG31 0x31    
-#define RK0PG61 0x61    
-#define RK0PG71 0x71    
+#define RK0PG31 0x31
+#define RK0PG61 0x61
+#define RK0PG71 0x71
 
 /*
  * Addressing types
@@ -121,8 +121,8 @@
 #define	REG8_B		3
 #define	REG8_E		4
 #define	REG8_D		5
-#define	REG8_H		6
-#define	REG8_L		7
+#define	REG8_L		6
+#define	REG8_H		7
 
 #define	REG16_AX	0
 #define	REG16_BC	1
@@ -166,7 +166,7 @@ extern struct adsym rb[];
  	/* machine dependent functions */
 
 #ifdef	OTHERSYSTEM
-	
+
 	/* r78kadr.c */
 extern	int		addr(struct expr *esp, int *aindx);
 extern	int		addrext(struct expr *esp, int *aindx, int *cidx, int *eidx);
