@@ -331,10 +331,13 @@
 	bt	saddrFE20.bit6,.		; EC 20 FD
 	callt	[ind60+12]			; ED
 	movw	saddrFF17,#0x7856		; EE 17 56 78
+	movw sp,#0xABCD             ;EE 1C CD AB
 	callt	[ind60+14]			; EF
 
 	mov	a,saddrFF17			; F0 17
+	mov a,psw 					; F0 1E
 	callt	[ind70]				; F1
+	mov psw,a                   ;F2 1E
 	mov	saddrFE20,a			; F2 20
 	callt	[ind70+2]			; F3
 	mov	a,sfrFF21			; F4 21

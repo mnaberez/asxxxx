@@ -590,6 +590,27 @@ struct mne *mp;
 				break;
 			}
 		} else
+		if ((t1 == S_SPCL) && (x1 == SPCL_PSW)) {
+			switch(t2) {
+			case S_REG8:
+				if (x2 == REG8_A) { /* PSW,A */
+					outaw(0x1EF2);
+				} else{
+					mcherr("A is the only 8-Bit register allowed");
+				}
+				break;
+			case S_SADDR:	/* PSW,saddr */
+			case S_SFR:	/* PSW,sfr */
+			case S_EXT:	/* PSW,addr16 */
+			case S_AEXT:	/* PSW,!addr16 */
+				outaw(0x1E11);
+				outrb(&e2, 0);
+				break;
+			default:
+				aerr();
+				break;
+			}
+    } else
 		if ((t2 == S_REG8) && (x2 == REG8_A)) {
 			switch(t1) {
 			case S_SADDR:	/* saddr,A */
@@ -656,27 +677,6 @@ struct mne *mp;
 			default:	aerr();		break;
 			}
 			break;
-		} else
-		if ((t1 == S_SPCL) && (x1 == SPCL_PSW)) {
-			switch(t2) {
-			case S_REG8:
-				if (x2 == REG8_A) {
-					outab(0x1EF2);
-				} else{
-					mcherr("A is the only 8-Bit register allowed");
-				}
-				break;
-			case S_SADDR:	/* PSW,saddr */
-			case S_SFR:	/* PSW,sfr */
-			case S_EXT:	/* PSW,addr16 */
-			case S_AEXT:	/* PSW,!addr16 */
-				outaw(0x1E11);
-				outrb(&e2, 0);
-				break;
-			default:
-				aerr();
-				break;
-			}
 		} else {
 			aerr();
 		}
