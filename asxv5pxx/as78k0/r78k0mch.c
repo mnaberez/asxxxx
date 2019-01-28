@@ -537,8 +537,8 @@ struct mne *mp;
 		if ((t1 == S_REG8) && (x1 == REG8_A)) {
 			switch(t2) {
 			case S_SPCL:
-				if (x2 == SPCL_PSW) {
-					outaw(0x1E11);
+				if (x2 == SPCL_PSW) { /* A,PSW */
+					outaw(0x1EF0);
 				} else {
 					mcherr("PSW is the only special register allowed");
 				}
