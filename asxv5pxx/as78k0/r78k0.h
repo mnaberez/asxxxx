@@ -69,7 +69,7 @@
 #define	S_EXT	40
 
 /*
- * 78KOS Instruction types
+ * 78K0 Instruction types
  */
 #define	S_MOV	50
 #define	S_XCH	51

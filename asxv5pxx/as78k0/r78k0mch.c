@@ -25,7 +25,7 @@
 #include "asxxxx.h"
 #include "r78k0.h"
 
-char	*cpu	= "Renesas/NEC 78K/O";
+char	*cpu	= "Renesas/NEC 78K/0";
 char	*dsft	= "asm";
 
 /*
@@ -43,7 +43,7 @@ char	*dsft	= "asm";
 #define	P3	((char) (OPCY_NONE | 0x03))
 
 /*
- * 78KO Cycle Count
+ * 78K0 Cycle Count
  *
  *	opcycles = r78k0pg[opcode]
  */
@@ -355,7 +355,7 @@ struct mne *mp;
 			aerr();
 		}
 		break;
-		
+
 	case S_ROT:	/* A  or  A,1 */
 		t1 = addr(&e1, &x1);
 		if ((t1 == S_REG8) && (x1 == REG8_A)) {
