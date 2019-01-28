@@ -697,6 +697,17 @@ struct mne *mp;
 			} else {
 				aerr();
 			}
+    } else
+    /* AX,SP */
+    if ((t1 == S_REG16) && (t2 == S_SPCL)) {
+      if (x1 != REG16_AX) {
+        mcherr("AX is the only 16-Bit register allowed");
+      } else
+      if (x2 != SPCL_SP) {
+        mcherr("SP is the only special register allowed");
+      } else {
+        outaw(0x1C89);
+      }
 		} else
 		if (t2 == S_IMM) {
 			switch(t1) {

@@ -216,6 +216,7 @@
 	mov	a,[hl]				; 87
 	add	saddrFF17,#byt23		; 88 17 23
 	movw	ax,saddrFF17			; 89 17
+  movw ax,sp                  ;89 1c
 	dbnz	c,.				; 8A FE
 	dbnz	b,.				; 8B FE
 	bt	saddrFE20.bit0,.		; 8C 20 FD
