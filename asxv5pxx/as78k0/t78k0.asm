@@ -236,6 +236,7 @@
 	mov	[hl],a				; 97
 	sub	saddrFF17,#byt23		; 98 17 23
 	movw	saddrFF17,ax			; 99 17
+  movw sp,ax                  ;99 1c
 	call	addr16				; 9A 16 E0
 	br	!addr16				; 9B 16 E0
 	bt	saddrFE20.bit1,.		; 9C 20 FD
