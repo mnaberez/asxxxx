@@ -1336,8 +1336,8 @@ struct mne *mp;
 		/* PSW */
 		if ((t1 == S_SPCL) && (x1 == SPCL_PSW)) {
 			switch(rf) {
-			case S_PSH:	outab(0x23);	break;
-			case S_POP:	outab(0x22);	break;
+			case S_PSH:	outab(0x22);	break;
+			case S_POP:	outab(0x23);	break;
 			default:	aerr();		break;
 			}
 		} else {

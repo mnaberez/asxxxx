@@ -102,8 +102,8 @@
 
 	set1	cy				; 20
 	clr1	cy				; 21
-	pop	psw				; 22
-	push	psw				; 23
+	push	psw				; 22
+	pop	psw				; 23
 	ror	a,1				; 24
 	rorc	a,1				; 25
 	rol	a,1				; 26
