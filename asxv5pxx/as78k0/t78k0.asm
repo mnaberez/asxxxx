@@ -84,6 +84,7 @@
 	add	a,[hl]				; 0F
 
 	movw	ax,#0x1234			; 10 34 12
+	mov psw,#byt01   				; 11 1E 01
 	mov	saddrFE20,#byt01		; 11 20 01
 	movw	bc,#0x6789			; 12 89 67
 	mov	sfrFF21,#byt23			; 13 21 23

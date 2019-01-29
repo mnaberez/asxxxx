@@ -603,6 +603,7 @@ struct mne *mp;
 			case S_SFR:	/* PSW,sfr */
 			case S_EXT:	/* PSW,addr16 */
 			case S_AEXT:	/* PSW,!addr16 */
+      case S_IMM: /* PSW,#Byte */
 				outaw(0x1E11);
 				outrb(&e2, 0);
 				break;
