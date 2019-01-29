@@ -49,9 +49,9 @@
 /*
  * Instruction Pages
  */
-#define RK0PG31 0x31
-#define RK0PG61 0x61
-#define RK0PG71 0x71
+#define RK0PG31 0x31    
+#define RK0PG61 0x61    
+#define RK0PG71 0x71    
 
 /*
  * Addressing types
@@ -69,7 +69,7 @@
 #define	S_EXT	40
 
 /*
- * 78K0 Instruction types
+ * 78KO Instruction types
  */
 #define	S_MOV	50
 #define	S_XCH	51
@@ -166,7 +166,7 @@ extern struct adsym rb[];
  	/* machine dependent functions */
 
 #ifdef	OTHERSYSTEM
-
+	
 	/* r78kadr.c */
 extern	int		addr(struct expr *esp, int *aindx);
 extern	int		addrext(struct expr *esp, int *aindx, int *cidx, int *eidx);

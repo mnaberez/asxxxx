@@ -506,8 +506,8 @@ struct adsym	reg8[] = {	/* byte registers */
     {	"r3",	REG8_B	},
     {	"r4",	REG8_E	},
     {	"r5",	REG8_D	},
-    {	"r6",	REG8_H	},
-    {	"r7",	REG8_L	},
+    {	"r6",	REG8_L	},
+    {	"r7",	REG8_H	},
     {	"",	0x00	}
 };
 

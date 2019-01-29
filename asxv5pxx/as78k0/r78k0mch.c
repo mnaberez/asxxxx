@@ -355,7 +355,7 @@ struct mne *mp;
 			aerr();
 		}
 		break;
-
+		
 	case S_ROT:	/* A  or  A,1 */
 		t1 = addr(&e1, &x1);
 		if ((t1 == S_REG8) && (x1 == REG8_A)) {
@@ -536,8 +536,8 @@ struct mne *mp;
 		} else
 		if ((t1 == S_REG8) && (x1 == REG8_A)) {
 			switch(t2) {
-			case S_SPCL:
-				if (x2 == SPCL_PSW) { /* A,PSW */
+			case S_SPCL: /* A,PSW */
+				if (x2 == SPCL_PSW) {
 					outaw(0x1EF0);
 				} else {
 					mcherr("PSW is the only special register allowed");
@@ -590,26 +590,15 @@ struct mne *mp;
 				break;
 			}
 		} else
-		if ((t1 == S_SPCL) && (x1 == SPCL_PSW)) {
-			switch(t2) {
-			case S_REG8:
-				if (x2 == REG8_A) { /* PSW,A */
-					outaw(0x1EF2);
-				} else{
-					mcherr("A is the only 8-Bit register allowed");
-				}
-				break;
-      case S_IMM: /* PSW,#Byte */
-				outaw(0x1E11);
-				outrb(&e2, 0);
-				break;
-			default:
-				aerr();
-				break;
-			}
-    } else
 		if ((t2 == S_REG8) && (x2 == REG8_A)) {
 			switch(t1) {
+			case S_SPCL:	/* PSW,A */
+				if (x1 == SPCL_PSW) {
+					outaw(0x1EF2);
+				} else{
+					mcherr("PSW is the only special register allowed");
+				}
+				break;
 			case S_SADDR:	/* saddr,A */
 				outab(0xF2);
 				outrb(&e1, 0);
@@ -674,6 +663,28 @@ struct mne *mp;
 			default:	aerr();		break;
 			}
 			break;
+		} else
+		if ((t1 == S_SPCL) && (x1 == SPCL_PSW)) {
+			switch(t2) {
+			case S_REG8:	/* PSW,A */
+				if (x2 == REG8_A) {
+					outaw(0x1EF2);
+				} else{
+					mcherr("A is the only 8-Bit register allowed");
+				}
+				break;
+			case S_IMM:	/* PSW,#byte */
+			case S_SADDR:	/* PSW,saddr */
+			case S_SFR:	/* PSW,sfr */
+			case S_EXT:	/* PSW,addr16 */
+			case S_AEXT:	/* PSW,!addr16 */
+				outaw(0x1E11);
+				outrb(&e2, 0);
+				break;
+			default:
+				aerr();
+				break;
+			}
 		} else {
 			aerr();
 		}
@@ -694,31 +705,17 @@ struct mne *mp;
 			} else {
 				aerr();
 			}
-    } else
-    /* AX,SP */
-    if ((t1 == S_REG16) && (t2 == S_SPCL)) {
-      if (x1 != REG16_AX) {
-        mcherr("AX is the only 16-Bit register allowed");
-      } else
-      if (x2 != SPCL_SP) {
-        mcherr("SP is the only special register allowed");
-      } else {
-        outaw(0x1C89);
-      }
-    } else
-    /* SP,AX */
-    if ((t1 == S_SPCL) && (t2 == S_REG16)) {
-      if (x1 != SPCL_SP) {
-        mcherr("SP is the only special register allowed");
-      } else
-      if (x2 != REG16_AX) {
-        mcherr("AX is the only 16-Bit register allowed");
-      } else {
-        outaw(0x1C99);
-      }
 		} else
 		if (t2 == S_IMM) {
 			switch(t1) {
+			case S_SPCL:	/* SP,#Word */
+				if (x1 == SPCL_SP) {
+					outaw(0x1CEE);
+					outrw(&e2, 0);
+				} else {
+					mcherr("SP is the only special register allowed");
+				}
+				break;
 			case S_REG16:	/* R16n,#Word */
 				outab(op + (x1 << 1));
 				outrw(&e2, 0);
@@ -733,14 +730,6 @@ struct mne *mp;
 				outrb(&e1, is_abs(&e1) ? 0 : R_PAGN);
 				outrw(&e2, 0);
 				break;
-      case S_SPCL: /* SP,#Word */
-        if (x1 != SPCL_SP) {
-          mcherr("SP is the only special register allowed");
-        } else {
-          outaw(0x1CEE);
-          outrw(&e2, 0);
-        }
-        break;
 			default:
 				aerr();
 				break;
@@ -748,6 +737,13 @@ struct mne *mp;
 		} else
 		if ((t1 == S_REG16) && (x1 == REG16_AX)) {
 			switch(t2) {
+			case S_SPCL:	/* AX,SP */
+				if (x2 == SPCL_SP) {
+					outaw(0x1C89);
+				} else {
+					mcherr("SP is the only special register allowed");
+				}
+				break;
 			case S_SADDR:	/* AX,saddr */
 				outab(0x89);
 				outrb(&e2, 0);
@@ -768,6 +764,13 @@ struct mne *mp;
 		} else
 		if ((t2 == S_REG16) && (x2 == REG16_AX)) {
 			switch(t1) {
+			case S_SPCL:	/* SP,AX */
+				if (x1 == SPCL_SP) {
+					outaw(0x1C99);
+				} else {
+					mcherr("SP is the only special register allowed");
+				}
+				break;
 			case S_SADDR:	/* saddr,AX */
 				outab(0x99);
 				outrb(&e1, 0);
